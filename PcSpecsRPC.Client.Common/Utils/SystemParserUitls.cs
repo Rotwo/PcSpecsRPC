@@ -1,4 +1,4 @@
-﻿namespace PcSpecsRPC.Client.Windows.Utils
+﻿namespace PcSpecsRPC.Client.Common.Utils
 {
     public static class SystemParserUitls
     {

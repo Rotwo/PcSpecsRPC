@@ -1,4 +1,4 @@
-﻿using PcSpecsRPC.Client.Windows.Utils;
+﻿using PcSpecsRPC.Client.Common.Utils;
 using PcSpecsRPC.Domain.ValueObjects;
 using System.Diagnostics;
 using System.Xml.Linq;
