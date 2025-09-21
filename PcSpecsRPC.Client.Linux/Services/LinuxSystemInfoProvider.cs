@@ -24,11 +24,6 @@ namespace PcSpecsRPC.Client.Linux.Services
             throw new NotImplementedException();
         }
 
-        public PcSpecsDto GetPcSpecs()
-        {
-            throw new NotImplementedException();
-        }
-
         public RamInfo? GetRamInfo()
         {
             DmiDecodeMemService.GenerateOutput();
@@ -41,6 +36,15 @@ namespace PcSpecsRPC.Client.Linux.Services
         public List<SoundDevice> GetSoundDevices()
         {
             throw new NotImplementedException();
+        }
+
+        public PcSpecsDto GetPcSpecs()
+        {
+            return new PcSpecsDto
+            {
+                CpuInfo = GetCpuInfo(),
+                RamInfo = GetRamInfo(),
+            };
         }
     }
 }
