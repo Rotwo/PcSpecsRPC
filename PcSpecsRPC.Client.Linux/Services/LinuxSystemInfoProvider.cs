@@ -8,7 +8,10 @@ namespace PcSpecsRPC.Client.Linux.Services
     {
         public CpuInfo? GetCpuInfo()
         {
-            throw new NotImplementedException();
+            LsCpuService.GenerateOutput();
+            LsCpuService.ParseOutput();
+            var cpuInfo = LsCpuService.GetCpuInfo();
+            return cpuInfo;
         }
 
         public List<DisplayDevice>? GetDisplayDevices()
