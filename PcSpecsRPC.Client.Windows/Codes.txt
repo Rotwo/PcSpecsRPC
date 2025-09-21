@@ -1,0 +1,88 @@
+﻿# CPU INFO
+                Console.WriteLine("Name - {0}", obj["Name"]);
+                Console.WriteLine("DeviceID - {0}" + obj["DeviceID"]);
+                Console.WriteLine("Manufacturer - {0}" + obj["Manufacturer"]);
+                Console.WriteLine("CurrentClockSpeed - {0}" + obj["CurrentClockSpeed"]);
+                Console.WriteLine("Caption - {0}" + obj["Caption"]);
+                Console.WriteLine("NumberOfCores - {0}" + obj["NumberOfCores"]);
+                Console.WriteLine("NumberOfEnabledCore - {0}" + obj["NumberOfEnabledCore"]);
+                Console.WriteLine("NumberOfLogicalProcessors - {0}" + obj["NumberOfLogicalProcessors"]);
+                Console.WriteLine("Architecture - {0}" + obj["Architecture"]);
+                Console.WriteLine("Family - {0}" + obj["Family"]);
+                Console.WriteLine("ProcessorType - {0}" + obj["ProcessorType"]);
+                Console.WriteLine("Characteristics - {0}" + obj["Characteristics"]);
+                Console.WriteLine("AddressWidth - {0}" + obj["AddressWidth"]);
+
+--------------------------------------------
+
+# OS INFO
+                Console.WriteLine("Name - {0}", obj["Name"]);
+                Console.WriteLine("DeviceID - {0}" + obj["DeviceID"]);
+                Console.WriteLine("Manufacturer - {0}" + obj["Manufacturer"]);
+                Console.WriteLine("CurrentClockSpeed - {0}" + obj["CurrentClockSpeed"]);
+                Console.WriteLine("Caption - {0}" + obj["Caption"]);
+                Console.WriteLine("NumberOfCores - {0}" + obj["NumberOfCores"]);
+                Console.WriteLine("NumberOfEnabledCore - {0}" + obj["NumberOfEnabledCore"]);
+                Console.WriteLine("NumberOfLogicalProcessors - {0}" + obj["NumberOfLogicalProcessors"]);
+                Console.WriteLine("Architecture - {0}" + obj["Architecture"]);
+                Console.WriteLine("Family - {0}" + obj["Family"]);
+                Console.WriteLine("ProcessorType - {0}" + obj["ProcessorType"]);
+                Console.WriteLine("Characteristics - {0}" + obj["Characteristics"]);
+                Console.WriteLine("AddressWidth - {0}" + obj["AddressWidth"]);
+
+
+# LISTING
+                Console.WriteLine($"--- WMI Class: Win32_processor ---");
+
+                // Iterate over all properties of the WMI object
+                foreach (PropertyData property in obj.Properties)
+                {
+                    Console.WriteLine($"{property.Name}: {property.Value}");
+                }
+
+
+
+
+
+// Language: C#
+using System;
+using System.Xml;
+
+class Program
+{
+    static void Main()
+    {
+        string xmlContent = @"<?xml version='1.0' encoding='utf-8'?>
+<DisplayDevices>
+    <DisplayDevice>
+        <CardName>NVIDIA GeForce GTX 1080</CardName>
+        <Resolution>1920x1080</Resolution>
+    </DisplayDevice>
+    <DisplayDevice>
+        <CardName>Intel UHD Graphics 620</CardName>
+        <Resolution>1366x768</Resolution>
+    </DisplayDevice>
+</DisplayDevices>";
+
+        using (XmlReader reader = XmlReader.Create(new System.IO.StringReader(xmlContent)))
+        {
+            // Move to the first DisplayDevice element
+            if (reader.ReadToDescendant("DisplayDevice"))
+            {
+                do
+                {
+                    // Directly read the CardName inside DisplayDevice
+                    reader.ReadToDescendant("CardName");
+                    string cardName = reader.ReadElementContentAsString();
+                    Console.WriteLine("Card Name: " + cardName);
+                } 
+                while (reader.ReadToNextSibling("DisplayDevice"));
+            }
+        }
+    }
+}
+
+/* Expected Output:
+Card Name: NVIDIA GeForce GTX 1080
+Card Name: Intel UHD Graphics 620
+*/
