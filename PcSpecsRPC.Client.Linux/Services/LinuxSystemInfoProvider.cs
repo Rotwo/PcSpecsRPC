@@ -31,7 +31,11 @@ namespace PcSpecsRPC.Client.Linux.Services
 
         public RamInfo? GetRamInfo()
         {
-            throw new NotImplementedException();
+            DmiDecodeMemService.GenerateOutput();
+            DmiDecodeMemService.ParseOutput();
+            var ramInfo = DmiDecodeMemService.GetRamInfo();
+
+            return ramInfo;
         }
 
         public List<SoundDevice> GetSoundDevices()
