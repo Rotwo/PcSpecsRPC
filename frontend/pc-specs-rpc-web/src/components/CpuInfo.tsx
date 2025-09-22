@@ -1,7 +1,12 @@
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import type { SystemData } from '@/types'
 import { Cpu } from 'lucide-react'
 
-export default function CpuInfo() {
+interface CpuInfoProps {
+  cpuInfo?: SystemData['specs']['cpuInfo']
+}
+
+export default function CpuInfo({ cpuInfo }: CpuInfoProps) {
   return (
     <Card className="col-span-1">
       <CardHeader className="flex flex-row items-center space-y-0 pb-2">
@@ -14,29 +19,31 @@ export default function CpuInfo() {
         <div>
           <p
             className="text-sm font-medium text-foreground truncate"
-            title={'13th Gen Intel(R) Core(TM) i5-13600KF'}
+            title={cpuInfo?.name ?? 'Undefined'}
           >
-            13th Gen Intel(R) Core(TM) i5-13600KF
+            {cpuInfo?.name ?? 'Undefined'}
           </p>
         </div>
 
         <div className="grid grid-cols-2 gap-4 text-sm">
           <div>
             <p className="text-muted-foreground">Cores</p>
-            <p className="font-medium">14</p>
+            <p className="font-medium">{cpuInfo?.cores ?? 'Undefined'}</p>
           </div>
           <div>
             <p className="text-muted-foreground">Threads</p>
-            <p className="font-medium">20</p>
+            <p className="font-medium">{cpuInfo?.threads ?? 'Undefined'}</p>
           </div>
           <div>
             <p className="text-muted-foreground">Base Frequency</p>
-            <p className="font-medium">3.5 GHz</p>
+            <p className="font-medium">
+              {cpuInfo?.baseClockGHz ?? 'Undefined'}
+            </p>
           </div>
           <div>
             <p></p>
             <p className="text-muted-foreground">Max Frequency</p>
-            <p className="font-medium">3.5 GHz</p>
+            <p className="font-medium">{cpuInfo?.maxClockGHz ?? 'Undefined'}</p>
           </div>
         </div>
       </CardContent>
