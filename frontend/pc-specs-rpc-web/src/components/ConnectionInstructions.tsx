@@ -1,14 +1,12 @@
 import {
   Card,
-  CardAction,
   CardContent,
-  CardDescription,
   CardFooter,
   CardHeader,
   CardTitle,
 } from '@/components/ui/card'
 import { Button } from './ui/button'
-import { Clipboard, Download } from 'lucide-react'
+import { Download } from 'lucide-react'
 
 interface ConnectionInstructionsProps {
   clientId: string
