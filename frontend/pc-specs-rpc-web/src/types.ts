@@ -1,4 +1,4 @@
-interface SystemData {
+export interface SystemData {
   clientId: string
   specs: {
     cpuInfo: {
