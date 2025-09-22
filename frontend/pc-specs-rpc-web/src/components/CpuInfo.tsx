@@ -6,7 +6,7 @@ export default function CpuInfo() {
     <Card className="col-span-1">
       <CardHeader className="flex flex-row items-center space-y-0 pb-2">
         <CardTitle className="text-lg font-semibold flex items-center gap-2">
-          <Cpu className="size-5 text-primary" />
+          <Cpu className="size-5 text-accent" />
           CPU
         </CardTitle>
       </CardHeader>
