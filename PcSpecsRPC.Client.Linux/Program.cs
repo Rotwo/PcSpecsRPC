@@ -8,12 +8,7 @@ internal class Program
 
     private async static Task Main(string[] args)
     {
-        if (IsAdministrator is not true)
-        {
-            throw new SystemException("Program must be run as root");
-        }
-
-        var systemInfoProvider = new LinuxSystemInfoProvider();
+        var systemInfoProvider = new LinuxSystemInfoProvider(isRoot: IsAdministrator);
 
         Console.WriteLine("Welcome to the Client of PcSpecsRPC WEB UI\n");
 

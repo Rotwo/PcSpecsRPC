@@ -4,8 +4,10 @@ using PcSpecsRPC.Domain.ValueObjects;
 
 namespace PcSpecsRPC.Client.Linux.Services
 {
-    public class LinuxSystemInfoProvider : ISystemInfoProvider
+    public class LinuxSystemInfoProvider(bool isRoot = false) : ISystemInfoProvider
     {
+        private readonly bool _isRoot = isRoot;
+
         public CpuInfo? GetCpuInfo()
         {
             LsCpuService.GenerateOutput();
@@ -43,7 +45,7 @@ namespace PcSpecsRPC.Client.Linux.Services
             return new PcSpecsDto
             {
                 CpuInfo = GetCpuInfo(),
-                RamInfo = GetRamInfo(),
+                RamInfo = _isRoot ? GetRamInfo() : null,
             };
         }
     }
