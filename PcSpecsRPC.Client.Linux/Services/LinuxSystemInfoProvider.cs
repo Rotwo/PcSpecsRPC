@@ -23,7 +23,10 @@ namespace PcSpecsRPC.Client.Linux.Services
 
         public OsInfo? GetOsInfo()
         {
-            throw new NotImplementedException();
+            OsInfoService.GenerateOutput();
+            OsInfoService.ParseOutput();
+            var osInfo = OsInfoService.GetOsInfo();
+            return osInfo;
         }
 
         public RamInfo? GetRamInfo()
@@ -46,6 +49,7 @@ namespace PcSpecsRPC.Client.Linux.Services
             {
                 CpuInfo = GetCpuInfo(),
                 RamInfo = _isRoot ? GetRamInfo() : null,
+                OsInfo = GetOsInfo()
             };
         }
     }
