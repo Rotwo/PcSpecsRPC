@@ -1,4 +1,5 @@
-﻿using PcSpecsRPC.Client.Common.Requests;
+﻿using System.Text.Json;
+using PcSpecsRPC.Client.Common.Requests;
 using PcSpecsRPC.Client.Common.Services;
 using PcSpecsRPC.Client.Linux.Services;
 
@@ -41,5 +42,15 @@ internal class Program
         while (string.IsNullOrEmpty(output));
 
         return output;
+    }
+
+    private static void Test()
+    {
+        Console.ForegroundColor = ConsoleColor.Green;
+        Console.WriteLine("Testing function");
+
+        Console.ForegroundColor = ConsoleColor.White;
+
+        Console.WriteLine(JsonSerializer.Serialize(CpuInfoService.GetInfo()));
     }
 }
