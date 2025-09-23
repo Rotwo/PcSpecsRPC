@@ -10,15 +10,40 @@ namespace PcSpecsRPC.Client.Linux.Services
 
         public CpuInfo? GetCpuInfo()
         {
-            LsCpuService.GenerateOutput();
+            /* LsCpuService.GenerateOutput();
             LsCpuService.ParseOutput();
             var cpuInfo = LsCpuService.GetCpuInfo();
-            return cpuInfo;
+            return cpuInfo; */
+            return CpuInfoService.GetInfo();
         }
 
         public List<DisplayDevice>? GetDisplayDevices()
         {
-            throw new NotImplementedException();
+            var output = GlxService.GenerateOutput();
+            var keyValuePairs = GlxService.ParseOutput(output);
+
+            var gpus = new List<DisplayDevice>();
+            var gpu = new DisplayDevice()
+            {
+                Manufacturer = keyValuePairs.Where(x => x.Key.Contains("OpenGL vendor")).FirstOrDefault().Value,
+                DriverVersion = keyValuePairs.Where(x => x.Key.Contains("OpenGL version")).FirstOrDefault().Value,
+                Name = keyValuePairs.Where(x => x.Key.Contains("OpenGL renderer")).FirstOrDefault().Value,
+                CurrentDisplayMode = "Undefined",
+                DedicatedMemory = "Undefined",
+                DeviceId = "Undefined",
+                Monitor = new Domain.ValueObjects.Monitor()
+                {
+                    Id = "Undefined",
+                    Model = "Undefined",
+                    Name = "Undefined",
+                    NativeMode = "Undefined",
+                    OutputType = "Undefined",
+                },
+                VideoProcessor = "Undefined"
+            };
+
+            gpus.Add(gpu);
+            return gpus;
         }
 
         public OsInfo? GetOsInfo()
@@ -49,7 +74,8 @@ namespace PcSpecsRPC.Client.Linux.Services
             {
                 CpuInfo = GetCpuInfo(),
                 RamInfo = _isRoot ? GetRamInfo() : null,
-                OsInfo = GetOsInfo()
+                OsInfo = GetOsInfo(),
+                DisplayDeviceInfo = GetDisplayDevices()
             };
         }
     }
