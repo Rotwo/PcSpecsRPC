@@ -34,7 +34,7 @@ export default function GpuInfo({ gpuInfo }: GpuInfoProps) {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
               <div>
                 <p className="text-muted-foreground mb-1">Monitor</p>
-                <p className="font-medium">HP Display</p>
+                <p className="font-medium">{gpu.monitor.name}</p>
                 <p className="text-xs text-muted-foreground">
                   {gpu.monitor.outputType ?? 'Undefined'}
                 </p>
