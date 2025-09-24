@@ -4,10 +4,8 @@ using PcSpecsRPC.Domain.ValueObjects;
 
 namespace PcSpecsRPC.Client.Linux.Services
 {
-    public class LinuxSystemInfoProvider(bool isRoot = false) : ISystemInfoProvider
+    public class LinuxSystemInfoProvider : ISystemInfoProvider
     {
-        private readonly bool _isRoot = isRoot;
-
         public CpuInfo? GetCpuInfo()
         {
             /* LsCpuService.GenerateOutput();
@@ -56,16 +54,27 @@ namespace PcSpecsRPC.Client.Linux.Services
 
         public RamInfo? GetRamInfo()
         {
-            DmiDecodeMemService.GenerateOutput();
-            DmiDecodeMemService.ParseOutput();
-            var ramInfo = DmiDecodeMemService.GetRamInfo();
+            var ramInfo = MemInfoService.GetRamInfo();
 
             return ramInfo;
         }
 
         public List<SoundDevice> GetSoundDevices()
         {
-            throw new NotImplementedException();
+            var _devices = LibsoundioService.ListOutputAudioDevices();
+            var devices = _devices.Where(x => x.Id != null).Select((x) => new SoundDevice
+            {
+                Description = x.Name,
+                DriverProvider = x.Id,
+                DefaultSoundPlayback = 0,
+                DefaultVoicePlayback = 0,
+                DriverDate = "Undefined",
+                DriverName = "Undefined",
+                DriverVersion = "Undefined",
+                HardwareId = x.Id
+            }).ToList();
+
+            return devices;
         }
 
         public PcSpecsDto GetPcSpecs()
@@ -73,9 +82,10 @@ namespace PcSpecsRPC.Client.Linux.Services
             return new PcSpecsDto
             {
                 CpuInfo = GetCpuInfo(),
-                RamInfo = _isRoot ? GetRamInfo() : null,
+                RamInfo = GetRamInfo(),
                 OsInfo = GetOsInfo(),
-                DisplayDeviceInfo = GetDisplayDevices()
+                DisplayDeviceInfo = GetDisplayDevices(),
+                SoundDeviceInfo = GetSoundDevices()
             };
         }
     }

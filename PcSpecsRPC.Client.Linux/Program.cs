@@ -5,11 +5,9 @@ using PcSpecsRPC.Client.Linux.Services;
 
 internal class Program
 {
-    public static bool IsAdministrator => Mono.Unix.Native.Syscall.geteuid() == 0;
-
     private async static Task Main(string[] args)
     {
-        var systemInfoProvider = new LinuxSystemInfoProvider(isRoot: IsAdministrator);
+        var systemInfoProvider = new LinuxSystemInfoProvider();
 
         Console.WriteLine("Welcome to the Client of PcSpecsRPC WEB UI\n");
 
