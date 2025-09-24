@@ -10,6 +10,7 @@
   <ItemGroup>
     <ProjectReference Include="..\PcSpecsRPC.Client.Common\PcSpecsRPC.Client.Common.csproj" />
     <ProjectReference Include="..\PcSpecsRPC.Domain\PcSpecsRPC.Domain.csproj" />
+    <ProjectReference Include="..\libsoundio-sharp\libsoundio-sharp\libsoundio-sharp.csproj" />
   </ItemGroup>
 
   <ItemGroup>
