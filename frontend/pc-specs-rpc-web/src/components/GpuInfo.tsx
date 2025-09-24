@@ -52,8 +52,6 @@ export default function GpuInfo({ gpuInfo }: GpuInfoProps) {
             </div>
           </div>
         ))}
-
-        {/*  */}
       </CardContent>
     </Card>
   )
